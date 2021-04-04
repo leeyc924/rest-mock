@@ -1,6 +1,6 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import styled from 'styled-components';
-import Side from '../common/Side';
+import Side from '../side/Side';
 
 const Header = React.lazy(() => import('../common/Header'));
 const Footer = React.lazy(() => import('../common/Footer'));
@@ -27,7 +27,7 @@ const Layout = props => {
 const Wrap = styled.div`
   display: grid;
   grid-template-columns: 1fr 3fr;
-  grid-template-rows: 4rem 1fr 2.5rem;
+  grid-template-rows: 4rem 50rem 2.5rem;
   grid-template-areas:
     'header header'
     'side main'

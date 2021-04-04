@@ -16,7 +16,6 @@ const Container = styled.div`
   grid-area: main;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
 `;
 
 export default Main;

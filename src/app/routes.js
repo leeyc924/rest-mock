@@ -1,21 +1,19 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Layout from '../pages/layouts/Layout';
-// import { history } from '../module/store';
+import { history } from '../module/store';
 import Main from '../pages/main/Main';
-// import { ConnectedRouter } from 'connected-react-router';
+import { ConnectedRouter } from 'connected-react-router';
 
 const Routes = () => {
   return (
-    // <ConnectedRouter history={history}>
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <Layout>
         <Switch>
           <Route path="/" exact={true} component={Main} />
         </Switch>
       </Layout>
-    </BrowserRouter>
-    // </ConnectedRouter>
+    </ConnectedRouter>
   );
 };
 
