@@ -24,7 +24,7 @@ const Side = () => {
         <Frame />
         <Frame />
         <Frame />
-        <Frame />
+        <Frame /> 
         <Frame />
       </FrameBox>
       <AddRemoveBox>
@@ -45,12 +45,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  margin-top: 0.625rem;
 `;
 
 const FrameBox = styled.div`
   display: flex;
   flex-wrap: wrap;
-  max-height: 90%;
+  height: 90%;
   overflow-y: scroll;
   overflow-x: hidden;
   padding: 0.625rem 0 0.625rem 0.625rem;
