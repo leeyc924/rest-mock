@@ -1,6 +1,5 @@
-import mogoose, { model, Schema } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-// Book 에서 사용할 서브다큐먼트의 스키마입니다.
 const Account = new Schema({
   accountId: String,
   accountEmail: String,
@@ -18,6 +17,6 @@ const Account = new Schema({
   delDt: String,
   regDt: String,
   modDt: String,
-});
+}, { collection: 'account' });
 
 export default model('Account', Account);

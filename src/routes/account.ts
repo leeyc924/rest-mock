@@ -1,7 +1,7 @@
 import express from 'express';
 import asyncify from 'express-asyncify';
 import dayjs from 'dayjs';
-import uuid from 'uuid';
+const { v4 } = require('uuid');
 import crypto from 'crypto';
 import path from 'path';
 import logUtil from '../utils/log';
@@ -16,13 +16,12 @@ router.post('/create', async (req: express.Request, res: express.Response) => {
       accountId: req.body.accountId,
       accountEmail: req.body.accountEmail,
       accountPw: req.body.accountPw,
-      placeId: dayjs().unix() + uuid.v4().substr(0, 8),
+      placeId: dayjs().unix() + v4().substr(0, 8),
       viewPlaceId: '',
       accountType: '',
-      accountAlias: uuid().v4(),
+      accountAlias: v4(),
       lastLoginDt: '',
       accountEmailVerifyYn: 'N',
-      sessionId: '',
       imagePath: '',
       imageSize: '',
       useYn: 'Y',

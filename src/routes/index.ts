@@ -8,7 +8,7 @@ const router = asyncify(express.Router());
 router.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
     const originalUrl = req.originalUrl;
-    if (originalUrl.indexOf('/editor/auth') === 0) {
+    if (originalUrl.indexOf('/editor/account') === 0) {
       next();
       return;
     }
