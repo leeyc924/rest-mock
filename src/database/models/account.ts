@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
 import { composeMongoose } from 'graphql-compose-mongoose';
 
-const Account = new Schema({
+const AccountSchema = new Schema({
   accountId: String,
   accountEmail: String,
   accountPw: String,
@@ -20,9 +20,11 @@ const Account = new Schema({
   modDt: String,
 }, { collection: 'account' });
 
+const Account = model('account', AccountSchema);
+
 const AccountModel = {
-  AccountSchema: model('account', Account),
-  AccountTC: composeMongoose(model('account', Account)),
+  AccountSchema: Account,
+  AccountTC: composeMongoose(Account),
 };
 
 export default AccountModel;
