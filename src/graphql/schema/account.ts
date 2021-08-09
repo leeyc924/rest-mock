@@ -1,17 +1,19 @@
 import accountModel from '../../database/models/account';
-// import '../mutation/auccount';
+import '../mutation/auccount';
 
 const AccountQuery = {
   accountById: accountModel.AccountTC.mongooseResolvers.findById(),
   // accountByIds: accountModel.AccountTC.getResolver('findByIds'),
   // accountOne: accountModel.AccountTC.getResolver('findOne'),
-  accountMany: accountModel.AccountTC.mongooseResolvers.findMany(),
+  // accountMany: accountModel.AccountTC.mongooseResolvers.findMany(),
   // accountCount: accountModel.AccountTC.getResolver('count'),
   // accountConnection: accountModel.AccountTC.getResolver('connection'),
   // accountPagenation: accountModel.AccountTC.getResolver('pagination'),
 };
 
 const AccountMutation = {
+  signUp: accountModel.AccountTC.getResolver('signUp'),
+  // accountCreateOne: accountModel.AccountTC.getResolver('createOne'),
   // accountCreateOne: accountModel.AccountTC.getResolver('createOne'),
   // accountCreateMany: accountModel.AccountTC.getResolver('createMany'),
   // accountUpdateById: accountModel.AccountTC.getResolver('updateById'),

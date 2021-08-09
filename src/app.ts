@@ -26,7 +26,7 @@ export function configureApp() {
 
   app.use('/graphql', cors(), graphqlHTTP((requset) => {
     return {
-      // context: { startTime: Date.now() },
+      // context: { startTime: Date.now() }, // TODO type에러 뜨는데 왜뜨는지 모르겠음
       schema: graphqlSchema,
       graphiql: true,
       // extensions,
