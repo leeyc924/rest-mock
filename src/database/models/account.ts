@@ -1,15 +1,15 @@
 import { model, Schema } from 'mongoose';
+import { composeMongoose } from 'graphql-compose-mongoose';
 
-const Account = new Schema({
+const AccountSchema = new Schema({
   accountId: String,
   accountEmail: String,
   accountPw: String,
   placeId: String,
   viewPlaceId: String,
   accountType: String,
-  accountAlias: String,
   lastLoginDt: String,
-  accountEmailVerifyYn: String,
+  pwChangeDt: String,
   imagePath: String,
   imageSize: String,
   useYn: String,
@@ -19,4 +19,11 @@ const Account = new Schema({
   modDt: String,
 }, { collection: 'account' });
 
-export default model('Account', Account);
+const Account = model('account', AccountSchema);
+
+const AccountModel = {
+  AccountSchema: Account,
+  AccountTC: composeMongoose(Account),
+};
+
+export default AccountModel;
