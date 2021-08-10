@@ -12,11 +12,11 @@ const AccountQuery = {
 };
 
 const AccountMutation = {
-  signUp: accountModel.AccountTC.getResolver('signUp'),
+  // signUp: accountModel.AccountTC.getResolver('signUp'),
+  signUp: accountModel.AccountTC.getResolver('createOne'),
   // accountCreateOne: accountModel.AccountTC.getResolver('createOne'),
-  // accountCreateOne: accountModel.AccountTC.getResolver('createOne'),
-  // accountCreateMany: accountModel.AccountTC.getResolver('createMany'),
   // accountUpdateById: accountModel.AccountTC.getResolver('updateById'),
+  // accountCreateMany: accountModel.AccountTC.getResolver('createMany'),
   // accountUpdateOne: accountModel.AccountTC.getResolver('updateOne'),
   // accountUpdateMany: accountModel.AccountTC.getResolver('updateMany'),
   // accountRemoveById: accountModel.AccountTC.getResolver('removeById'),
