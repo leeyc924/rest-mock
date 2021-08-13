@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose';
-import { composeMongoose } from 'graphql-compose-mongoose';
 
 const AccountSchema = new Schema({
   accountId: String,
@@ -21,9 +20,4 @@ const AccountSchema = new Schema({
 
 const Account = model('account', AccountSchema);
 
-const AccountModel = {
-  AccountSchema: Account,
-  AccountTC: composeMongoose(Account),
-};
-
-export default AccountModel;
+export default Account;
