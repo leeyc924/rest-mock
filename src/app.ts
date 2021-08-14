@@ -7,7 +7,7 @@ import { connectMongoDb } from './database/connection';
 
 import router from './routes/index';
 
-import { schema, root } from './graphql/index';
+import { schema, rootValue } from './graphql/index';
 
 export function configureApp() {
   connectMongoDb();
@@ -21,7 +21,7 @@ export function configureApp() {
   app.use('/graphql', cors(), graphqlHTTP((requset) => {
     return {
       schema: schema,
-      rootValue: root,
+      rootValue: rootValue,
       graphiql: true,
     }
   }));

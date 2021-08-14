@@ -1,33 +1,35 @@
-import { GraphQLObjectType, GraphQLString } from "graphql";
+import { signUp } from "./resolver";
 
-import { find } from './query';
-import { signUp } from './mutation';
+export const AccountType = `
+  type Account {
+    accountId: String
+    accountEmail: String
+    accountPw: String
+    placeId: String
+    viewPlaceId: String
+    accountType: String
+    lastLoginDt: String
+    pwChangeDt: String
+    imagePath: String
+    imageSize: String
+    useYn: String
+    delYn: String
+    delDt: String
+    regDt: String
+    modDt: String
+  }
 
-export const accountType = new GraphQLObjectType({
-  name: 'account',
-  fields: () => ({
-    accountId: { type: GraphQLString },
-    accountEmail: { type: GraphQLString },
-    accountPw: { type: GraphQLString },
-    placeId: { type: GraphQLString },
-    viewPlaceId: { type: GraphQLString },
-    accountType: { type: GraphQLString },
-    lastLoginDt: { type: GraphQLString },
-    pwChangeDt: { type: GraphQLString },
-    imagePath: { type: GraphQLString },
-    imageSize: { type: GraphQLString },
-    useYn: { type: GraphQLString },
-    delYn: { type: GraphQLString },
-    delDt: { type: GraphQLString },
-    regDt: { type: GraphQLString },
-    modDt: { type: GraphQLString },
-  })
-});
+  type ReturnSignUpType {
+    accessToken: String
+  }
+`;
 
-export const accountQuery = {
-  find,
-}
+export const AccountMutation = `
+  signUp(accountEmail: String! accountPw: String!): ReturnSignUpType
+`;
 
-export const accountMutation = {
-  signUp
+export const accountResolver = {
+  signUp: async (args, context, info) => {
+    return await signUp(args);
+  }
 }

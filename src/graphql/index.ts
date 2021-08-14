@@ -1,39 +1,24 @@
 import { buildSchema } from 'graphql';
 
-import { signUp } from './account/mutation';
+import { AccountMutation, AccountType, accountResolver } from './account/index';
 
 export const schema = buildSchema(`
-type Query {
-  find: [Account]
-}
-  type Mutation {
-    signUp(accountEmail: String!, accountPw: String!): [AccountToken]
+  ${AccountType}
+
+  type RootQuery {
+   find: [Account]
   }
 
-  type AccountToken {
-    accountToken: String,
+  type RootMutation {
+    ${AccountMutation}
   }
-  type Account{
-    accountId: String,
-    accountEmail: String,
-    accountPw: String,
-    placeId: String,
-    viewPlaceId: String,
-    accountType: String,
-    lastLoginDt: String,
-    pwChangeDt: String,
-    imagePath: String,
-    imageSize: String,
-    useYn: String,
-    delYn: String,
-    delDt: String,
-    regDt: String,
-    modDt: String
+
+  schema {
+    query: RootQuery,
+    mutation: RootMutation
   }
 `);
 
-export const root = {
-  signUp: async (args, context, info) => {
-    return await signUp(args);
-  }
+export const rootValue = {
+  ...accountResolver
 };

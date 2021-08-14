@@ -55,7 +55,7 @@ export const signUp = async (args) => {
     const accessToken = await new Promise((resolve, reject) => {
       jwt.sign(
         payload,
-        process.env.CORE_JWT_SECRET || '',
+        process.env.JWT_SECRET || '',
         { expiresIn: '1d' },
         (err, token) => {
           if (err) {
