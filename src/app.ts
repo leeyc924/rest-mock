@@ -23,7 +23,7 @@ export function configureApp() {
       schema: schema,
       rootValue: rootValue,
       graphiql: true
-    } 
+    }
   }));
 
   app.use('/editor', router);
