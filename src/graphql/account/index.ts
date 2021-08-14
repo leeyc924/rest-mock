@@ -1,5 +1,3 @@
-import { signUp } from "./resolver";
-
 export const AccountType = `
   type Account {
     accountId: String
@@ -29,7 +27,4 @@ export const AccountMutation = `
 `;
 
 export const accountResolver = {
-  signUp: async (args, context, info) => {
-    return await signUp(args);
-  }
 }

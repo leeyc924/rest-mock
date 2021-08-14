@@ -1,6 +1,6 @@
 import { buildSchema } from 'graphql';
 
-import { AccountMutation, AccountType, accountResolver } from './account/index';
+import { AccountType, accountResolver } from './account/index';
 
 export const schema = buildSchema(`
   ${AccountType}
@@ -9,13 +9,9 @@ export const schema = buildSchema(`
    find: [Account]
   }
 
-  type RootMutation {
-    ${AccountMutation}
-  }
 
   schema {
     query: RootQuery,
-    mutation: RootMutation
   }
 `);
 

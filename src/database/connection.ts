@@ -18,11 +18,11 @@ export const connectMongoDb = () => {
           console.log('mongodb connect');
   });
 };
-  
+
   mongoose.connection.on('error', (error)=>{
     console.log('mongodb connect error', error);
   });
-  
+
   // todo: 연결 실패시 재시도 5번 제한?
   // mongoose.connection.on('disconnected',()=>{
 //   console.log('mongodb id disconnected. Tying to connect again');
