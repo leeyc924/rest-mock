@@ -22,7 +22,7 @@ export function configureApp() {
     return {
       schema: schema,
       rootValue: rootValue,
-      graphiql: true,
+      graphiql: true
     }
   }));
 
