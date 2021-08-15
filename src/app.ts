@@ -19,36 +19,6 @@ export function configureApp() {
 
   app.use(cors());
 
-  app.use('/graphql', async (req: Request, res: Response, next: Function) => {
-    try {
-      let accessToken = req.body.accessToken || req.query.accessToken || '';
-
-      const decodedData = await new Promise((resolve, reject) => {
-        jwt.verify(
-          accessToken,
-          process.env.JWT_SECRET || '',
-          (
-            err:
-              | jwt.JsonWebTokenError
-              | jwt.NotBeforeError
-              | jwt.TokenExpiredError
-              | null,
-            decodedData: object | undefined,
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(decodedData);
-            }
-          },
-        );
-      });
-      next();
-    } catch (error) {
-      res.status(401).send();
-    }
-  })
-
   app.use('/graphql', graphqlHTTP(() => {
     return {
       schema: schema,

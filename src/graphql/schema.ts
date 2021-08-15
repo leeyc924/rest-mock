@@ -1,11 +1,12 @@
-export const AccountType = `
+const schemaType = `
   type Account {
     accountId: String
     accountEmail: String
     accountPw: String
+    accountNm: String
     placeId: String
     viewPlaceId: String
-    accountType: String
+    loginType: String
     lastLoginDt: String
     pwChangeDt: String
     imagePath: String
@@ -16,15 +17,6 @@ export const AccountType = `
     regDt: String
     modDt: String
   }
-
-  type ReturnSignUpType {
-    accessToken: String
-  }
 `;
 
-export const AccountMutation = `
-  signUp(accountEmail: String! accountPw: String!): ReturnSignUpType
-`;
-
-export const accountResolver = {
-}
+export default schemaType;

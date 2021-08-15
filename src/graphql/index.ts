@@ -1,20 +1,28 @@
 import { buildSchema } from 'graphql';
 
-import { AccountType, accountResolver } from './account/index';
+import { AuthMutation, AuthType, authResolver } from './auth/index';
+
+import SchemaType from './schema';
 
 export const schema = buildSchema(`
-  ${AccountType}
+  ${SchemaType}
+
+  ${AuthType}
 
   type RootQuery {
    find: [Account]
   }
 
+  type RootMutation {
+    ${AuthMutation}
+  }
 
   schema {
     query: RootQuery,
+    mutation: RootMutation
   }
 `);
 
 export const rootValue = {
-  ...accountResolver
+  ...authResolver
 };
