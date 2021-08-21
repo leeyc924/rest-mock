@@ -1,18 +1,21 @@
-import dayjs from "dayjs";
-import { v4 } from "uuid";
+import dayjs from 'dayjs';
+import express, { Request, Response, Router } from 'express';
+import asyncify from 'express-asyncify';
+import { v4 } from 'uuid';
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 
-import logUtil from "../../utils/log";
-import Account from "../../database/schema/account";
-import { ILoginArg, ISignUpArg } from "./model";
+import Account from '../database/schema/account';
+import logUtil from "../utils/log";
 
-export const signUp = async (args: ISignUpArg) => {
+const router: Router = asyncify(express.Router());
+
+router.post('/signup', async (req: Request, res: Response) => {
   try {
     const accountId = dayjs().unix() + v4().substr(0, 8);
-    const accountEmail = args.accountEmail;
-    const accountPw = crypto.createHash("sha256").update(args.accountPw).digest("hex");
-    const accountNm = args.accountNm;
+    const accountEmail = req.body.accountEmail;
+    const accountPw = crypto.createHash("sha256").update(req.body.accountPw).digest("hex");
+    const accountNm = req.body.accountNm;
 
     const account = await Account.findOne({
       accountEmail,
@@ -62,19 +65,28 @@ export const signUp = async (args: ISignUpArg) => {
       );
     });
 
-    return { accessToken };
-  } catch (error) {
-    logUtil.error(error.toString());
+    const result = {
+      resultFlag: true,
+      accessToken,
+    };
 
-    throw new Error(error.toString());
+    res.json(result);
+  } catch (err) {
+    logUtil.error(err.toString());
+
+    const result = {
+      resultFlag: false,
+    };
+
+    res.json(result);
   }
-};
+});
 
-export const login = async (args: ILoginArg) => {
+router.post('/login', async (req: Request, res: Response) => {
   try {
-    const accountEmail = args.accountEmail;
-    const accountPw = crypto.createHash("sha256").update(args.accountPw).digest("hex");
-    const loginType = args.loginType;
+    const accountEmail = req.body.accountEmail;
+    const accountPw = crypto.createHash("sha256").update(req.body.accountPw).digest("hex");
+    const loginType = req.body.loginType;
 
     const account = await Account.findOne({
       accountEmail,
@@ -126,17 +138,25 @@ export const login = async (args: ILoginArg) => {
       log.logId = "auth-sign-in";
       logUtil.debug(log);
 
-      let result: any = {};
-      result.accessToken = accessToken;
-      result.loginInfo = payload;
+      const result = {
+        resultFlag: true,
+        accessToken: accessToken,
+        loginInfo: payload,
+      };
 
-      return result;
+      res.json(result);
     } else {
       throw new Error("account is not exist");
     }
   } catch (error) {
     logUtil.error(error.toString());
 
-    throw new Error(error.toString());
+    const result = {
+      resultFlag: false,
+    };
+
+    res.json(result);
   }
-};
+});
+
+export default router;

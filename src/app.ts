@@ -1,14 +1,10 @@
 import express, { Request, Response } from 'express';
 import asyncify from 'express-asyncify';
-import { graphqlHTTP } from 'express-graphql';
 import cors from 'cors';
-import jwt from 'jsonwebtoken';
 
 import { connectMongoDb } from './database/connection';
 
 import router from './routes/index';
-
-import { schema, rootValue } from './graphql/index';
 
 export function configureApp() {
   connectMongoDb();
@@ -19,17 +15,9 @@ export function configureApp() {
 
   app.use(cors());
 
-  app.use('/graphql', graphqlHTTP(() => {
-    return {
-      schema: schema,
-      rootValue: rootValue,
-      graphiql: true
-    }
-  }));
-
   app.use('/editor', router);
 
-  app.use(function (req: express.Request, res: express.Response) {
+  app.use(function (req: Request, res: Response) {
     res.status(500).json({ message: 'Invalid Path' });
   });
 

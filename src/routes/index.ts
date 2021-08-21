@@ -1,9 +1,11 @@
-import express, { Router } from 'express';
+import express, { NextFunction, Request, Response, Router } from 'express';
 import asyncify from 'express-asyncify';
+
+import accountRouter from './account';
 
 const router: Router = asyncify(express.Router());
 
-router.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+router.use(async (req: Request, res: Response, next: NextFunction) => {
   try {
     const originalUrl = req.originalUrl;
 
@@ -13,7 +15,9 @@ router.use(async (req: express.Request, res: express.Response, next: express.Nex
   }
 });
 
-router.post('/*', async (req: express.Request, res: express.Response) => {
+router.use('/account', accountRouter);
+
+router.post('/*', async (req: Request, res: Response) => {
   res.status(500).send();
 });
 
