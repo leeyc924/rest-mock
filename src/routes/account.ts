@@ -139,7 +139,6 @@ router.post('/login', async (req: Request, res: Response) => {
       logUtil.debug(log);
 
       const result = {
-        resultFlag: true,
         accessToken: accessToken,
         loginInfo: payload,
       };
@@ -151,11 +150,7 @@ router.post('/login', async (req: Request, res: Response) => {
   } catch (error) {
     logUtil.error(error.toString());
 
-    const result = {
-      resultFlag: false,
-    };
-
-    res.json(result);
+    res.status(404);
   }
 });
 
