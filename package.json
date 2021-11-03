@@ -1,8 +1,9 @@
 {
-  "name": "eliga-store-api",
+  "name": "editor-api",
   "version": "1.0.0",
   "description": "",
   "main": "build/server.js",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "start": "tsc -w",
