@@ -19,7 +19,7 @@ router.get('/ping', async (req: Request, res: Response) => {
   } catch (err) {
     res.status(401).send();
   }
-});
+}); 
 
 router.post('/*', async (req: Request, res: Response) => {
   res.status(500).send();
