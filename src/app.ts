@@ -2,12 +2,12 @@ import express, { Request, Response } from 'express';
 import asyncify from 'express-asyncify';
 import cors from 'cors';
 
-import { connectMongoDb } from './database/connection';
+// import { connectMongoDb } from './database/connection';
 
 import router from './routes/index';
 
 export function configureApp() {
-  connectMongoDb();
+  // connectMongoDb();
 
   const app = asyncify(express());
   app.use(express.urlencoded({ limit: '30mb', extended: true, parameterLimit: 100000 }));
