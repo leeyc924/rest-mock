@@ -13,6 +13,14 @@ router.use(async (req: Request, res: Response, next: NextFunction) => {
   }
 });
 
+router.get('/ping', async (req: Request, res: Response) => {
+  try {
+    res.json('pong');
+  } catch (err) {
+    res.status(401).send();
+  }
+});
+
 router.post('/*', async (req: Request, res: Response) => {
   res.status(500).send();
 });
