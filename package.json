@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "build/server.js",
-  "type": "module",
   "scripts": {
-    "start": "node build/index.js",
+    "start": "node build/server.js",
     "build": "tsc",
     "postinstall": "npm run build",
     "clean": "npm prune --production",
@@ -30,7 +29,7 @@
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.11",
     "@types/jsonwebtoken": "^8.5.0",
-    "@types/node": "^14.14.22",
+    "@types/node": "16.11.6",
     "@types/uuid": "^8.3.1",
     "bestzip": "^2.2.0",
     "typescript": "^4.2.4"

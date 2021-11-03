@@ -1,8 +1,6 @@
 import express, { NextFunction, Request, Response, Router } from 'express';
 import asyncify from 'express-asyncify';
 
-import accountRouter from './account';
-
 const router: Router = asyncify(express.Router());
 
 router.use(async (req: Request, res: Response, next: NextFunction) => {
@@ -14,8 +12,6 @@ router.use(async (req: Request, res: Response, next: NextFunction) => {
     res.status(401).send();
   }
 });
-
-router.use('/account', accountRouter);
 
 router.post('/*', async (req: Request, res: Response) => {
   res.status(500).send();
