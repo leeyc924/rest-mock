@@ -55,19 +55,15 @@ router.post('/signup', async (req: Request, res: Response) => {
     });
 
     const result = {
-      resultFlag: true,
       accessToken,
+      accountInfo,
     };
 
     res.json(result);
   } catch (error: any) {
     logUtil.error(error.toString());
 
-    const result = {
-      resultFlag: false,
-    };
-
-    res.status(404).json(result);
+    res.status(404);
   }
 });
 
@@ -116,8 +112,8 @@ router.post('/login', async (req: Request, res: Response) => {
       logUtil.debug(log);
 
       const result = {
-        resultFlag: true,
         accessToken: accessToken,
+        accountInfo: account,
       };
 
       res.json(result);
@@ -127,11 +123,7 @@ router.post('/login', async (req: Request, res: Response) => {
   } catch (error: any) {
     logUtil.error(error.toString());
 
-    const result = {
-      resultFlag: false,
-    };
-
-    res.status(404).json(result);
+    res.status(404);
   }
 });
 
