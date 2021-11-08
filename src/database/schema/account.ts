@@ -2,34 +2,30 @@ import { model, Schema } from 'mongoose';
 
 export interface IAccountSchema {
   accountId: string,
-  userId: string,
-  userPw: string,
-  userNm: string,
+  accountPw: string,
+  accountNm: string,
   lastLoginDt: string,
   pwChangeDt: string,
-  imagePath: string,
-  imageSize: string,
-  useYn: string,
-  regDt: string,
+  useYn: 'Y' | 'N',
   modDt: string,
-  delYn: string,
+  regDt: string,
+  delYn: 'Y' | 'N',
   delDt: string,
+  permission: 'USER' | 'ADMIN',
 }
 
 const AccountSchema = new Schema({
   accountId: String,
-  userId: String,
-  userPw: String,
-  userNm: String,
+  accountPw: String,
+  accountNm: String,
   lastLoginDt: String,
   pwChangeDt: String,
-  imagePath: String,
-  imageSize: String,
   useYn: String,
-  regDt: String,
   modDt: String,
-  delYn: String,
+  regDt: String,
   delDt: String,
+  delYn: String,
+  permission: String
 }, { collection: 'account' });
 
 const Account = model<IAccountSchema>('account', AccountSchema);

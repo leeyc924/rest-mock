@@ -12,13 +12,12 @@ const router: Router = asyncify(express.Router());
 
 router.post('/signup', async (req: Request, res: Response) => {
   try {
-    const accountId = dayjs().unix() + v4().substr(0, 8);
-    const userId = req.body.userId;
-    const userPw = crypto.createHash('sha256').update(req.body.userPw).digest('hex');
-    const userNm = req.body.userNm;
+    const accountId = req.body.accountId;
+    const accountPw = crypto.createHash('sha256').update(req.body.accountPw).digest('hex');
+    const accountNm = req.body.accountNm;
 
     const account = await Account.findOne({
-      userId,
+      accountId,
     });
 
     if (account) {
@@ -27,16 +26,14 @@ router.post('/signup', async (req: Request, res: Response) => {
 
     const accountInfo: IAccountSchema = {
       accountId: accountId,
-      userId: userId,
-      userPw: userPw,
-      userNm: userNm,
+      accountPw: accountPw,
+      accountNm: accountNm,
       lastLoginDt: dayjs().toISOString(),
-      pwChangeDt: dayjs().toISOString(),
-      imagePath: '',
-      imageSize: '',
+      permission: 'USER',
       useYn: 'Y',
       delYn: 'N',
       delDt: '',
+      pwChangeDt: dayjs().toISOString(),
       regDt: dayjs().toISOString(),
       modDt: dayjs().toISOString(),
     };
@@ -45,7 +42,7 @@ router.post('/signup', async (req: Request, res: Response) => {
 
     let payload: any = {};
     payload.accountId = accountId;
-    payload.userId = userId;
+    payload.accountNm = accountNm;
 
     const accessToken = await new Promise((resolve, reject) => {
       jwt.sign(payload, process.env.JWT_SECRET || '', { expiresIn: '1d' }, (err, token) => {
@@ -70,21 +67,21 @@ router.post('/signup', async (req: Request, res: Response) => {
       resultFlag: false,
     };
 
-    res.json(result);
+    res.status(404).json(result);
   }
 });
 
 router.post('/login', async (req: Request, res: Response) => {
   try {
-    const userId = req.body.userId;
-    const userPw = crypto.createHash('sha256').update(req.body.userPw).digest('hex');
+    const accountId = req.body.accountId;
+    const accountPw = crypto.createHash('sha256').update(req.body.accountPw).digest('hex');
 
     const account = await Account.findOne({
-      userId,
+      accountId,
     });
 
     if (account) {
-      if (account.userPw !== userPw) {
+      if (account.accountPw !== accountPw) {
         throw new Error('password incorrect.');
       }
 
@@ -100,7 +97,7 @@ router.post('/login', async (req: Request, res: Response) => {
 
       const payload = {
         accountId: account.accountId,
-        userId: account.userId,
+        accountNm: account.accountNm,
       };
 
       const accessToken = await new Promise((resolve, reject) => {
@@ -134,7 +131,7 @@ router.post('/login', async (req: Request, res: Response) => {
       resultFlag: false,
     };
 
-    res.json(result);
+    res.status(404).json(result);
   }
 });
 
