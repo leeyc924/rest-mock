@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import express, { Request, Response, Router } from 'express';
 import asyncify from 'express-asyncify';
-import { v4 } from 'uuid';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 
@@ -21,7 +20,9 @@ router.post('/signup', async (req: Request, res: Response) => {
     });
 
     if (account) {
-      throw new Error('email is exist');
+      const error = new Error('id is exist');
+      error.name = 'IdExistError';
+      throw error;
     }
 
     const accountInfo: IAccountSchema = {
@@ -40,10 +41,7 @@ router.post('/signup', async (req: Request, res: Response) => {
 
     await Account.create({ ...accountInfo });
 
-    let payload: any = {};
-    payload.accountId = accountId;
-    payload.accountNm = accountNm;
-    payload.permission = accountInfo.permission;
+    const payload = accountInfo;
 
     const accessToken = await new Promise((resolve, reject) => {
       jwt.sign(payload, process.env.JWT_SECRET || '', { expiresIn: '1d' }, (err, token) => {
@@ -64,7 +62,7 @@ router.post('/signup', async (req: Request, res: Response) => {
   } catch (error: any) {
     logUtil.error(error.toString());
 
-    res.status(401).send();
+    res.status(400).json(error);
   }
 });
 
@@ -79,26 +77,28 @@ router.post('/login', async (req: Request, res: Response) => {
 
     if (account) {
       if (account.accountPw !== accountPw) {
-        throw new Error('password incorrect.');
+        const error = new Error('password incorrect.');
+        error.name = 'PasswordIncorrectError';
+        throw error;
       }
 
       if (account.useYn !== 'Y') {
-        throw new Error('email is not use.');
+        const error = new Error('id is not use.');
+        error.name = 'IdNotUseError';
+        throw error;
       }
 
       if (account.delYn !== 'N') {
-        throw new Error('email is deleted.');
+        const error = new Error('id is deleted.');
+        error.name = 'IdDeleteError';
+        throw error;
       }
 
       await Account.updateOne({ accountId: account.accountId }, { $set: { lastLoginDt: dayjs().toISOString() } });
 
-      const payload = {
-        accountId: account.accountId,
-        accountNm: account.accountNm,
-        permission: account.permission,
-      };
+      const payload = account;
 
-      const accessToken = await new Promise((resolve, reject) => {
+      const accessToken: string | undefined = await new Promise((resolve, reject) => {
         jwt.sign(payload, process.env.JWT_SECRET || '', { expiresIn: '1d' }, (err, token) => {
           if (err) {
             reject(err);
@@ -120,12 +120,43 @@ router.post('/login', async (req: Request, res: Response) => {
 
       res.json(result);
     } else {
-      throw new Error('account is not exist');
+      const error = new Error('id is not exist');
+      error.name = 'IdNotExistError';
+      throw error;
     }
   } catch (error: any) {
     logUtil.error(error.toString());
 
-    res.status(401).send();
+    res.status(400).json(error);
+  }
+});
+
+router.post('/confirm-token', async (req: Request, res: Response) => {
+  try {
+    const accessToken = req.body.accessToken;
+
+    const decodedData: { accountId: string; accountNm: string; accountPw: string; permission: string } = await new Promise(
+      (resolve, reject) => {
+        jwt.verify(accessToken, process.env.JWT_SECRET || '', (err, decodedData) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(decodedData);
+          }
+        });
+      },
+    );
+
+    const result = {
+      accessToken,
+      accountInfo: decodedData,
+    };
+
+    res.json(result);
+  } catch (error: any) {
+    logUtil.error(error.toString());
+
+    res.status(403).json(error);
   }
 });
 
