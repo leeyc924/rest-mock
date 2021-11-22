@@ -152,7 +152,7 @@ router.post('/confirm-token', async (req: Request, res: Response) => {
         jwt.verify(accessToken, process.env.JWT_SECRET || '', (err, decodedData) => {
           if (err) {
             reject(err);
-          } else {
+          } else { 
             resolve(decodedData);
           }
         });
