@@ -96,7 +96,19 @@ router.post('/login', async (req: Request, res: Response) => {
 
       await Account.updateOne({ accountId: account.accountId }, { $set: { lastLoginDt: dayjs().toISOString() } });
 
-      const payload = account;
+      const payload = {
+        accountId: account.accountId,
+        accountPw: account.accountPw,
+        accountNm: account.accountNm,
+        lastLoginDt: account.lastLoginDt,
+        permission: account.permission,
+        useYn: account.useYn,
+        delYn: account.delYn,
+        delDt: account.delDt,
+        pwChangeDt: account.pwChangeDt,
+        regDt: account.regDt,
+        modDt: account.modDt,
+      };
 
       const accessToken: string | undefined = await new Promise((resolve, reject) => {
         jwt.sign(payload, process.env.JWT_SECRET || '', { expiresIn: '1d' }, (err, token) => {
