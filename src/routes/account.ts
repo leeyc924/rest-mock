@@ -159,9 +159,13 @@ router.post('/confirm-token', async (req: Request, res: Response) => {
       },
     );
 
+    const accountInfo = await Account.findOne({
+      accountId: decodedData.accountId,
+    });
+
     const result = {
       accessToken,
-      accountInfo: decodedData,
+      accountInfo,
     };
 
     res.json(result);
