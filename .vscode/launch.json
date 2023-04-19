@@ -14,7 +14,7 @@
       "env": {
         "NODE_DEBUG": "DEBUG ERROR"
       },
-      "program": "${workspaceFolder}/build/server.js",
+      "program": "${workspaceFolder}/build/index.js",
       "preLaunchTask": "tsc: watch - tsconfig.json",
       "outFiles": [
         "${workspaceFolder}/build/**/*.js"

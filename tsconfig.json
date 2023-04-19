@@ -1,18 +1,23 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
+    "module": "CommonJS",
+    "target": "ESNext",
     "sourceMap": true,
     "outDir": "./build",
     "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "noEmitOnError": true,
-    "noImplicitAny": false,
-    "watch": false
+    "noEmit": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@routes": ["./src/routes"],
+      "@types": ["./src/types"],
+    },
   },
-  "exclude": [
-    "build",
-    "node_modules"
-  ]
+  "exclude": ["build", "node_modules"]
 }
