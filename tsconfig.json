@@ -8,14 +8,13 @@
     "strict": true,
     "esModuleInterop": true,
     "noEmitOnError": true,
-    "noEmit": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
     "allowJs": true,
     "skipLibCheck": true,
+    
     "baseUrl": ".",
     "paths": {
-      "@routes": ["./src/routes"],
       "@types": ["./src/types"],
     },
   },

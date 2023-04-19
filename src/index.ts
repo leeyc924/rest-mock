@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import router from '@routes';
+import router from './routes';
 
 dotenv.config();
 const port = process.env.PORT || 8005;
