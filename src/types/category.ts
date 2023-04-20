@@ -1,1 +1,5 @@
-export type CategoryName = "coffee" | "latte" | "tea";
+export interface Category {
+  id: string;
+  KrName: string;
+  EnName: string;
+}
