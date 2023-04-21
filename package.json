@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "start": "node build/index.js",
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "clean": "npm prune --production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "git push heroku master"
@@ -20,6 +20,7 @@
     "express": "^4.18.2",
     "express-asyncify": "^1.1.0",
     "tsc": "^2.0.4",
+    "tsc-alias": "^1.8.5",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

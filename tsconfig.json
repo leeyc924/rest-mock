@@ -12,10 +12,10 @@
     "noImplicitAny": true,
     "allowJs": true,
     "skipLibCheck": true,
-    
     "baseUrl": ".",
     "paths": {
-      "@types": ["./src/types"],
+      "@database": ["./src/database"],
+      "@types": ["./src/types"]
     },
   },
   "exclude": ["build", "node_modules"]
