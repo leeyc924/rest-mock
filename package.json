@@ -4,8 +4,7 @@
   "description": "",
   "main": "build/index.js",
   "scripts": {
-    "start": "node build/index.js",
-    "build": "tsc && tsc-alias",
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "clean": "npm prune --production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "git push heroku master"
@@ -19,8 +18,8 @@
     "dotenv": "^10.0.0",
     "express": "^4.18.2",
     "express-asyncify": "^1.1.0",
+    "ts-node": "^10.9.1",
     "tsc": "^2.0.4",
-    "tsc-alias": "^1.8.5",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -29,6 +28,7 @@
     "@types/node": "16.11.6",
     "@types/uuid": "^8.3.1",
     "bestzip": "^2.2.0",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.4"
   }
 }

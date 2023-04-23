@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "target": "ESNext",
+    "target": "ES2022",
     "sourceMap": true,
     "outDir": "./build",
     "rootDir": "./src",
@@ -14,8 +14,8 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@database": ["./src/database"],
-      "@types": ["./src/types"]
+      "@@db": ["src/db"],
+      "@@types": ["src/types"]
     },
   },
   "exclude": ["build", "node_modules"]

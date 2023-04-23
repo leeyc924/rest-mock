@@ -1,4 +1,4 @@
-import { categoryList, menuList } from '@database';
+import { categoryList, menuList } from '@@db';
 import express from 'express';
 
 const router = express.Router();

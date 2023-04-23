@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response, Router } from 'express';
+import express from 'express';
 import cafeRouter from './cafe';
 
 const router = express.Router();
