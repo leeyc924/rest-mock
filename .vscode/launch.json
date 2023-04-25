@@ -7,18 +7,15 @@
       "type": "node",
       "runtimeArgs": [
         "-r",
-        "${workspaceFolder}/node_modules/ts-node/register",
+        "ts-node/register",
         "-r",
-        "${workspaceFolder}/node_modules/tsconfig-paths/register"
+        "tsconfig-paths/register"
       ],
       "args": ["${workspaceFolder}/src/index.ts"],
-      "cwd": "${workspaceFolder}",
       "env": {
         "NODE_ENV": "development",
         "NODE_DEBUG": "DEBUG ERROR"
       },
-      "sourceMaps": true,
-      "outFiles": ["${workspaceFolder}/build/**/*.js"]
     }
   ]
 }
