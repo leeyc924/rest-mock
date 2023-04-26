@@ -1,6 +1,6 @@
+import { graphqlHTTP } from 'express-graphql';
 import { graphql, buildSchema } from 'graphql';
 
-// Construct a schema, using GraphQL schema language
 export const schema = buildSchema(`
   type Query {
     hello: String
@@ -13,3 +13,9 @@ export const root = {
     return "Hello world!"
   },
 };
+
+export const gqlHTTP = graphqlHTTP({
+  schema: schema,
+  rootValue: root,
+  graphiql: true,
+});

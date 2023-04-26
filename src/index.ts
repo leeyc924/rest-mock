@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import router from './routes';
-import { root, schema } from './graphql';
+import { gqlHTTP } from './graphql';
 
 dotenv.config();
 const port = process.env.PORT || 8005;
@@ -12,14 +12,7 @@ app.use(express.urlencoded({ limit: '30mb', extended: true, parameterLimit: 1000
 app.use(express.json({ limit: '30mb' }));
 app.use(cors());
 
-app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema: schema,
-    rootValue: root,
-    graphiql: true,
-  }),
-);
+app.use('/graphql', gqlHTTP);
 app.use('/mock', router);
 
 app.use(function (req, res) {
@@ -29,10 +22,3 @@ app.use(function (req, res) {
 app.listen(port, () => {
   console.log('Express is listening on port', port);
 });
-function graphqlHTTP(arg0: {
-  schema: any;
-  rootValue: any;
-  graphiql: boolean;
-}): import('express-serve-static-core').RequestHandler<{}, any, any, import('qs').ParsedQs, Record<string, any>> {
-  throw new Error('Function not implemented.');
-}
