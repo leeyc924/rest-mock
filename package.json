@@ -6,21 +6,19 @@
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/server.ts",
     "build": "tsc",
-    "zip": "bestzip ./dist/function.zip build node_modules",
-    "upload": "aws lambda update-function-code --function-name eliga-interaction-api --zip-file fileb://dist/function.zip",
-    "deploy": "npm run build && npm run pack && npm run upload",
+    "zip": "yarn build && bestzip ./dist/function.zip build node_modules",
     "clean": "npm prune --production"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vendia/serverless-express": "^4.10.1",
     "aws-lambda": "^1.0.7",
     "cors": "^2.8.5",
     "dayjs": "^1.11.7",
     "dotenv": "^10.0.0",
     "express": "^4.18.2",
+    "serverless-http": "^3.2.0",
     "ts-node": "^10.9.1",
     "tsc": "^2.0.4",
     "uuid": "^9.0.0"
