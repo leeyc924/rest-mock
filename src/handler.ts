@@ -1,6 +1,8 @@
 process.env.TZ = 'Asia/Seoul';
 
-import serverless from 'serverless-http';
+import { createServer, proxy } from 'aws-serverless-express';
+import { eventContext } from 'aws-serverless-express/middleware';
+import { Context } from 'aws-lambda';
 import configureApp from './app';
 
 const binaryMimeTypes: string[] = [
@@ -24,4 +26,7 @@ const binaryMimeTypes: string[] = [
 ];
 
 const app = configureApp();
-export const handler = serverless(app);
+app.use(eventContext());
+const server = createServer(app, undefined, binaryMimeTypes);
+export const handler = (event: any, context: Context) =>
+  proxy(server, event, context);
