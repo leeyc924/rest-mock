@@ -1,20 +1,18 @@
 import express from 'express';
 import cors from 'cors';
+import compression from 'compression';
 import router from './router';
 
-function configureApp() {
-  const app = express();
-  app.use(express.urlencoded({ limit: '30mb', extended: true, parameterLimit: 100000 }));
-  app.use(express.json({ limit: '30mb' }));
-  app.use(cors());
+const app = express();
+router.use(compression());
+router.use(cors());
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
 
-  app.use('/api', router);
+app.use('/api', router);
 
-  app.use(function (req, res) {
-    res.status(500).json({ message: 'Invalid Path' });
-  });
+app.use('/*', function (req, res) {
+  res.status(500).json({ message: 'Invalid Path' });
+});
 
-  return app;
-}
-
-export default configureApp;
+export { app };
