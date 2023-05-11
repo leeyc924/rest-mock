@@ -1,12 +1,12 @@
 {
   "name": "rest-mock",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
-  "main": "build/server.js",
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/server.ts",
-    "build": "tsc",
-    "zip": "yarn build && bestzip ./dist/function.zip build node_modules",
+    "build": "node esbuild.config.js",
+    "zip": "cd build && zip -r index.zip index.js*",
     "clean": "npm prune --production"
   },
   "keywords": [],
@@ -20,7 +20,6 @@
     "dayjs": "^1.11.7",
     "dotenv": "^10.0.0",
     "express": "^4.18.2",
-    "source-map-support": "^0.5.21",
     "ts-node": "^10.9.1",
     "uuid": "^9.0.0"
   },
@@ -31,6 +30,8 @@
     "@types/node": "16.11.6",
     "@types/uuid": "^8.3.1",
     "bestzip": "^2.2.1",
+    "esbuild": "^0.17.18",
+    "source-map-support": "^0.5.21",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.4"
   }
