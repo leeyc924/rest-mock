@@ -5,17 +5,12 @@
       "name": "Debug Functions",
       "request": "launch",
       "type": "node",
-      "runtimeArgs": [
-        "-r",
-        "ts-node/register",
-        "-r",
-        "tsconfig-paths/register"
-      ],
-      "args": ["${workspaceFolder}/src/server.ts"],
-      "env": {
-        "NODE_ENV": "development",
-        "NODE_DEBUG": "DEBUG ERROR"
-      },
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "start:debug"],
+      "console": "integratedTerminal",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
     }
   ]
 }

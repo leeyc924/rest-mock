@@ -1,22 +1,21 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ES2022",
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
     "sourceMap": true,
-    "outDir": "./build",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "noEmitOnError": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "allowJs": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@@db": ["src/db"],
-      "@@types": ["src/types"]
-    },
-  },
-  "exclude": ["build", "node_modules"]
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false
+  }
 }
