@@ -1,17 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { TodoCreateDto, TodoUpdateDto } from './dto/todo.dto';
-
+import { TodoCreateDto } from './dto/todo.create.dto';
+import { TodoUpdateDto } from './dto/todo.update.dto';
+import { TodoDto } from './dto/todo.dto';
+import TodoJSON from '../../db/todo.json';
 @Injectable()
 export class TodosService {
   create(body: TodoCreateDto) {
     return 'This action adds a new todo';
   }
 
-  findAll() {
-    return `This action returns all todos`;
+  list(): TodoDto[] {
+    return TodoJSON;
   }
 
-  findOne(id: number) {
+  detail(id: number) {
     return `This action returns a #${id} todo`;
   }
 

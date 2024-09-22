@@ -16,7 +16,3 @@ export class TodoDto {
   @ApiProperty({ description: '수정인', example: '홍길동' })
   modId: string;
 }
-
-export class TodoCreateDto extends TodoDto {}
-
-export class TodoUpdateDto extends TodoDto {}
