@@ -1,13 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { SwaggerModule } from '@nestjs/swagger';
+import { NestiaSwaggerComposer } from '@nestia/sdk';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const config = new DocumentBuilder().setTitle('Mintongg API').setDescription('/docs').setVersion('1.0').build();
-  const document = SwaggerModule.createDocument(app, config, { ignoreGlobalPrefix: false });
-  SwaggerModule.setup('docs', app, document);
+  const document = await NestiaSwaggerComposer.document(app, {});
+  SwaggerModule.setup('docs', app, document as any);
 
   await app.listen(8005);
 }

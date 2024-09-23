@@ -2,7 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@ne
 import { TodosService } from './todos.service';
 import { TodoCreateDto } from './dto/todo.create.dto';
 import { TodoUpdateDto } from './dto/todo.update.dto';
-import { TypedBody, TypedRoute } from '@nestia/core';
+import { TypedBody, TypedParam, TypedRoute } from '@nestia/core';
+import { TodoDto } from './dto/todo.dto';
 
 @Controller('todos')
 export class TodosController {
@@ -14,26 +15,26 @@ export class TodosController {
     return this.todosService.create(body);
   }
 
-  @Get()
-  list() {
+  @TypedRoute.Get()
+  list(): TodoDto[] {
     return this.todosService.list();
   }
 
-  @Get(':id')
+  @TypedRoute.Get(':id')
   @HttpCode(204)
-  detail(@Param('id') id: string) {
+  detail(@TypedParam('id') id: string) {
     return this.todosService.detail(+id);
   }
 
-  @Patch(':id')
+  @TypedRoute.Patch(':id')
   @HttpCode(204)
-  update(@Param('id') id: string, @Body() body: TodoUpdateDto) {
+  update(@TypedParam('id') id: string, @TypedBody() body: TodoUpdateDto) {
     return this.todosService.update(+id, body);
   }
 
-  @Delete(':id')
+  @TypedRoute.Delete(':id')
   @HttpCode(204)
-  remove(@Param('id') id: string) {
+  remove(@TypedParam('id') id: string) {
     return this.todosService.remove(+id);
   }
 }

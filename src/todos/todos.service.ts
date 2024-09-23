@@ -9,7 +9,7 @@ export class TodosService {
     return 'This action adds a new todo';
   }
 
-  list(): TodoDto[] {
+  list() {
     return TodoJSON;
   }
 
