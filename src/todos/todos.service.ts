@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { TodoCreateDto } from './dto/todo.create.dto';
 import { TodoUpdateDto } from './dto/todo.update.dto';
-import { TodoDto } from './dto/todo.dto';
 import TodoJSON from '../../db/todo.json';
+
 @Injectable()
 export class TodosService {
   create(body: TodoCreateDto) {

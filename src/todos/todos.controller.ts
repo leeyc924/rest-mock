@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@nestjs/common';
+import { Controller, HttpCode } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { TodoCreateDto } from './dto/todo.create.dto';
 import { TodoUpdateDto } from './dto/todo.update.dto';
@@ -21,7 +21,6 @@ export class TodosController {
   }
 
   @TypedRoute.Get(':id')
-  @HttpCode(204)
   detail(@TypedParam('id') id: string) {
     return this.todosService.detail(+id);
   }
